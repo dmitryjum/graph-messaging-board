@@ -40,27 +40,31 @@ const typeDefs = `
 const messages: Array<{ id: string, content: string }> = [];
 const pubsub = new PubSub();
 
+type MessageArgs = { id: string };
+type AddMessageArgs = { content: string };
+type UpdateMessageArgs = { id: string, content: string };
+
 // Define resolvers for handling GraphQL operations
 const resolvers = {
   Query: {
     messages: () => messages,
-    message: (parent, { id }) => messages.find(message => message.id === id),
+    message: (parent: any, { id }: MessageArgs) => messages.find(message => message.id === id),
   },
   Mutation: {
-    addMessage: (parent, { content }) => {
+    addMessage: (parent: any, { content }: AddMessageArgs) => {
       const message = { id: `${messages.length + 1}`, content };
       messages.push(message);
       pubsub.publish('MESSAGE_ADDED', { messageAdded: message });
       return message;
     },
-    updateMessage: (parent, { id, content }) => {
+    updateMessage: (parent: any, { id, content }: UpdateMessageArgs) => {
       const message = messages.find(message => message.id === id);
       if (!message) throw new Error('Message not found');
       message.content = content;
       pubsub.publish('MESSAGE_UPDATED', { messageUpdated: message });
       return message;
     },
-    deleteMessage: (parent, { id }) => {
+    deleteMessage: (parent: any, { id }: MessageArgs) => {
       const index = messages.findIndex(message => message.id === id);
       if (index === -1) throw new Error('Message not found');
       const [message] = messages.splice(index, 1);
