@@ -132,7 +132,7 @@ const Messages: React.FC = () => {
   });
 
   const handleAddMessage = () => {
-    if (!content.trim())) {
+    if (!content.trim()) {
       setErrorMessage('Message can not be empty, Please Enter your Message...');
       return;
     }
