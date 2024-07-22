@@ -1,0 +1,45 @@
+.btn {
+
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  color: var(--color-white);
+
+  &:hover {
+    background-color: var(--color-error-dark);
+    cursor: pointer;
+  }
+
+  &.next-space {
+    margin-right: 10px;
+  }
+
+  &.primary {
+    background-color: var(--color-primary);
+
+    &:hover {
+      background-color: var(--color-primary-dark)
+    }
+  }
+
+  &.type1 {
+    background-color: var(--color-success);
+
+    &:hover {
+      background-color: var(--color-success-dark)
+    }
+  }
+
+  &.type2 {
+    background-color: var(--color-error);
+
+    &:hover {
+      background-color: var(--color-error-dark);
+    }
+  }
+
+  &.small {
+    padding: 5px 10px;
+  }
+}

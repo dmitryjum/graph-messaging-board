@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery, useMutation, useSubscription } from '@apollo/client';
+import { MessageList } from './MessageList';
 import styles from './Messages.module.scss';
 
 const GET_MESSAGES= gql`
@@ -165,7 +166,8 @@ const Messages: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <ul className={styles.messageList}>
+
+      {/* <ul className={styles.messageList}>
         {data.messages.map((message: any) => (
           <li key={message.id}>
             {message.content}
@@ -175,7 +177,10 @@ const Messages: React.FC = () => {
             </div>
           </li>
         ))}
-      </ul>
+      </ul> */}
+
+      <MessageList handleUpdate={handleUpdateMessage} handleDelete={handleDeleteMessage} data={data} />
+
       <div className={styles.inputGroup}>
         <input type="text" value={content} onChange={e => setContent(e.target.value)} />
         <button onClick={handleAddMessage}>Add Message</button>
