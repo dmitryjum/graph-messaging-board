@@ -74,10 +74,10 @@ const resolvers = {
     },
     Subscription: {
         messageAdded: {
-            subscribe: () => pubsub.asyncIterator(['MESSAGED_ADDED']),
+            subscribe: () => pubsub.asyncIterator(['MESSAGE_ADDED']),
         },
         messageUpdated: {
-            subscribe: () => pubsub.asyncIterator(['MESSAGED_UPDATED']),
+            subscribe: () => pubsub.asyncIterator(['MESSAGE_UPDATED']),
         },
         messageDeleted: {
             subscribe: () => pubsub.asyncIterator(['MESSAGE_DELETED']),
