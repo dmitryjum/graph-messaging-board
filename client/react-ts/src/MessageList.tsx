@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './MessageList.module.scss';
 import { Message } from './Message';
 import Button from './components/Button/Button';
-import Alert from '../../components/Alert/Alert';
+import Alert from './components/Alert/Alert';
 interface MessageListProps {
     data: { messages: Message[] };
     handleUpdate: (id: string) => void;

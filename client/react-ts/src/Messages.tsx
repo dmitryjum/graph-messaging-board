@@ -1,68 +1,17 @@
 import React, { useState } from 'react';
 import { gql, useQuery, useMutation, useSubscription } from '@apollo/client';
-import { MessageList } from './MessageList';
+import MessageList from './MessageList';
 import styles from './Messages.module.scss';
+import {
+  GET_MESSAGES,
+  ADD_MESSAGE,
+  UPDATE_MESSAGE,
+  DELETE_MESSAGE,
+  MESSAGE_ADDED,
+  MESSAGE_UPDATED,
+  MESSAGE_DELETED,
+} from './graphql/operations';
 
-const GET_MESSAGES= gql`
-  query GetMessages {
-    messages {
-      id
-      content
-    }
-  }
-`;
-
-const ADD_MESSAGE = gql`
-  mutation AddMesssage($content: String!) {
-    addMessage(content: $content) {
-      id
-      content
-    }
-  }
-`;
-
-const UPDATE_MESSAGE = gql`
-  mutation UpdateMessage($id: ID!, $content: String!) {
-    updateMessage(id: $id, content: $content) {
-      id
-      content
-    }
-  }
-`;
-
-const DELETE_MESSAGE = gql`
-  mutation DeleteMessage($id: ID!) {
-    deleteMessage(id: $id) {
-      id
-    }
-  }
-`;
-
-const MESSAGED_ADDED = gql`
-  subscription OnMessagedAdded {
-    messageAdded {
-      id
-      content
-    }
-  }
-`;
-
-const MESSAGE_UPDATED = gql`
-  subscription OnMessageUpdated {
-    messageUpdated {
-      id
-      content
-    }
-  }
-`;
-
-const MESSAGE_DELETED = gql`
-  subscription OnMessageDeleted {
-    messageDeleted {
-      id
-    }
-  }
-`;
 
 const Messages: React.FC = () => {
   const [content, setContent] = useState('');
@@ -73,7 +22,7 @@ const Messages: React.FC = () => {
   const [updateMessage] = useMutation(UPDATE_MESSAGE);
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
 
-  useSubscription(MESSAGED_ADDED, {
+  useSubscription(MESSAGE_ADDED, {
     onSubscriptionData: ({ client, subscriptionData }) => {
       client.cache.modify({
         fields: {
@@ -166,18 +115,6 @@ const Messages: React.FC = () => {
 
   return (
     <div className={styles.container}>
-
-      {/* <ul className={styles.messageList}>
-        {data.messages.map((message: any) => (
-          <li key={message.id}>
-            {message.content}
-            <div className='button-wrapper'>
-              <button onClick={() => handleUpdateMessage(message.id)}>Update</button>
-              <button onClick={() => handleDeleteMessage(message.id)}>Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul> */}
 
       <MessageList handleUpdate={handleUpdateMessage} handleDelete={handleDeleteMessage} data={data} />
 
