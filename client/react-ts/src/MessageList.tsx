@@ -4,10 +4,11 @@ import { Message } from './Message';
 import Button from './components/Button/Button';
 import Alert from './components/Alert/Alert';
 interface MessageListProps {
-    data: { messages: Message[] };
-    handleUpdate: (id: string) => void;
-    handleDelete: (id: string) => void;
-  }
+  data: { messages: Message[] };
+  handleUpdate: (id: string) => void;
+  handleDelete: (id: string) => void;
+}
+
 const MessageList: React.FC<MessageListProps> = ({ handleUpdate, handleDelete, data }) => (
   <ul className={styles.messageList}>
     { data.messages.length > 0 ?  data?.messages.map((message: any) => (
