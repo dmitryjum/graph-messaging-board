@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MessageList from './MessageList';
 import { useMessages } from './hooks/useMessages';
+import MessageInput from './MessageInput';
 import MessageEditModal from './components/modal/MessageEditModal';
 import styles from './Messages.module.scss';
 import { ToastContainer } from 'react-toastify';
@@ -55,11 +56,13 @@ const Messages: React.FC = () => {
 
       <MessageList handleUpdate={handleUpdate} handleDelete={handleDeleteMessage} data={data} />
 
-      <div className={styles.inputGroup}>
-        <input type="text" value={content} onChange={e => setContent(e.target.value)} />
-        <button onClick={handleAddMessage}>Add Message</button>
-      </div>
-      {errorMessage && <span className={styles['error-text']}>{errorMessage}<button className={styles.close} onClick={() => setErrorMessage('')}>Close</button></span>}
+     <MessageInput
+        content={content}
+        setContent={setContent}
+        handleAddMessage={() => handleAddMessage(content)}
+        errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage}
+      />
 
       <MessageEditModal
         isOpen={isModalOpen}
