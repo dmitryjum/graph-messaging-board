@@ -10,7 +10,7 @@ export const GET_MESSAGES= gql`
 `;
 
 export const ADD_MESSAGE = gql`
-  mutation AddMesssage($content: String!) {
+  mutation AddMessage($content: String!) {
     addMessage(content: $content) {
       id
       content
